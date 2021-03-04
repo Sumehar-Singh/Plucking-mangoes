@@ -5,7 +5,7 @@ const Bodies = Matter.Bodies;
 const Body = Matter.Body;
 const Render = Matter.Render;
 const Constraint=Matter.Constraint;
-var treeObj, stoneObj,groundObject, launcherObject;
+var treeObj,groundObject;
 //var mango1;
 var world,boy;
 var stones, attach;
@@ -82,14 +82,12 @@ function mouseReleased()
 {
 	attach.fly();
 }
-function detectCollision(lstone,lmango)
+function detectCollision(lstones,lmango)
 {
 	mangoBodyPosition = lmango.body.position;
-	stoneBodyPosition = lstone.body.position;	
-	if(lstone.body.position.x - lmango.body.position.x < lmango.diameter + lstone.diameter 
-		&& lmango.body.position.x - lstone.body.position.x < lmango.diameter + lstone.diameter
-		&& lstone.body.position.y - lmango.body.position.y < lmango.diameter + lstone.diameter
-		&& lmango.body.position.y - lstone.body.position.y < lmango.diameter + lstone.diameter)
+	stoneBodyPosition = lstones.body.position;	
+	var distance = dist(stoneBodyPosition.x, stoneBodyPosition.y, mangoBodyPosition.x, mangoBodyPosition.y)
+	if(distance<=lmango.diameter + lstones.diameter)		
 		{
 			Matter.Body.setStatic(lmango.body, false);
 		}
